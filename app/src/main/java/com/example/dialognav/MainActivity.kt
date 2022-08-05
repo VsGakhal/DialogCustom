@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import com.example.dialognav.databinding.CustomLayoutBinding
 
@@ -15,55 +14,82 @@ import com.example.dialognav.databinding.CustomLayoutBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var tvText: TextView
-    lateinit var btnDialog  : Button
-    lateinit var email: EditText
-    lateinit var password: EditText
-    lateinit var btnLogin: Button
-    lateinit var tvForgotPassword: TextView
+
+    lateinit var btnUpdate:  Button
+    lateinit var tvName :    TextView
+    lateinit var tvAddress : TextView
+    lateinit var tvGender :  TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        email = findViewById(R.id.etEnterEmail)
-        password = findViewById(R.id.etPassword)
-        btnLogin = findViewById(R.id.btnLogin)
-        tvForgotPassword = findViewById(R.id.tvForgotPassword)
 
-        btnDialog = findViewById(R.id.btnDialog)
-        tvText = findViewById(R.id.tvWelcome)
+        btnUpdate = findViewById(R.id.btnUpdate)
+        tvName = findViewById(R.id.tvName)
+        tvAddress = findViewById(R.id.tvAddress)
+        tvGender = findViewById(R.id.tvGender)
 
-        btnDialog.setOnClickListener {
+
+
+        btnUpdate.setOnClickListener {
+
             var dialogBinding = CustomLayoutBinding.inflate(layoutInflater)
             var dialog = Dialog(this)
+
+
             dialog.setContentView(dialogBinding.root)
-            dialogBinding.etAmount.setText(tvText.text.toString())
-            dialogBinding.btnOk.setOnClickListener {
-                if(dialogBinding.etAmount.text.toString().isNullOrEmpty()){
-                    Toast.makeText(this, "enter amount", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
+
+
+            val layout = dialog.window?.setLayout(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            dialogBinding.DiaName.setText(tvName.text.toString())
+            dialogBinding.DiaAddress.setText(tvAddress.text.toString())
+
+
+            dialogBinding.diaUpdate.setOnClickListener {
+
+                dialogBinding.rgGender.setOnCheckedChangeListener { radioGroup, id ->
+                    when (id) {
+                        R.id.rbOthers -> {
+                            Toast.makeText(
+                                this,
+                                resources.getString(R.string.others),
+                                Toast.LENGTH_LONG
+                            ).show()
+                            dialogBinding.etOtherName.visibility = View.VISIBLE
+                        }
+                        else -> {
+                            dialogBinding.etOtherName.visibility = View.GONE
+                        }
+                    }
                 }
 
-                tvText.setText(dialogBinding.etAmount.text.toString())
+                if (dialogBinding.DiaName.text.toString().isNullOrEmpty()) {
+                    Toast.makeText(this, "enter name", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                } else if (dialogBinding.DiaAddress.text.toString().isNullOrEmpty()) {
+                    Toast.makeText(this, "enter address", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                } else if ((dialogBinding.etOtherName.visibility == View.VISIBLE) && (dialogBinding.etOtherName.text.toString()
+                        .isNullOrEmpty())
+                ) {
+                    Toast.makeText(this, "enter other gender", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
 
-                btnLogin.setOnClickListener {
-                    var enteredEmail = email.text.toString()
-                    var enteredPassword = password.text.toString()
-                    if (email.text.toString().isNullOrEmpty()==true){
-                        email.error=resources.getString(R.string.enter_email)
-                    }
-                    else if(password.text.toString().isNullOrEmpty()==true){
-                        password.error=resources.getString(R.string.Password)
-                        password.requestFocus()
-                    }
-                    else if ((password.text.toString().length?:0)<6){
-                        password.error=resources.getString(R.string.Password)
-                    }
-                    else {
+                } else {
+                    tvName.setText(dialogBinding.DiaName.text.toString())
+                    tvAddress.setText(dialogBinding.DiaAddress.text.toString())
 
-                        Toast.makeText(this,R.string.imp,Toast.LENGTH_LONG).show()
+                    if (dialogBinding.rbHe.isChecked) {
+                        tvGender.setText("Male")
+                    } else if (dialogBinding.rbShe.isChecked) {
+                        tvGender.setText("Female")
+                    } else
+                        tvGender.setText(dialogBinding.etOtherName.text.toString())
                     }
                 dialog.dismiss()
             }

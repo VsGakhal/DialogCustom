@@ -13,30 +13,59 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="WELCOME"
-        android:id="@+id/tvWelcome"
-        android:textColor="@color/black"
-        android:layout_marginTop="300dp"
-        android:textSize="30dp"
-        android:gravity="center" />
+        android:text="Your Name"
+        android:layout_marginLeft="10dp"
+        android:textSize="30sp"
+        />
 
-    <Button
-        android:id="@+id/btnDialog"
+    <TextView
+        android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/purple_500"
-        android:gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="DIALOG"
-        android:textColor="@color/white" />
+        android:textSize="10dp"
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/fragmentview"
+        />
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="550dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnDialog" />
+        android:layout_height="wrap_content"
+        android:text="Your Address"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"
+
+        />
+    <TextView
+        android:id="@+id/tvAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="10dp"
+
+
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Your Gender"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="30sp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvGender"
+        android:textSize="10dp"
+        />
+
+    <Button
+        android:id="@+id/btnUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update"
+        android:layout_marginTop="10dp"
+        android:textSize="25sp"
+        />
+
 
 </LinearLayout>
