@@ -48,25 +48,25 @@ class MainActivity : AppCompatActivity() {
             )
             dialogBinding.DiaName.setText(tvName.text.toString())
             dialogBinding.DiaAddress.setText(tvAddress.text.toString())
+            dialogBinding.rgGender.setOnCheckedChangeListener { radioGroup, id ->
+                when (id) {
+                    R.id.rbOthers -> {
+                        Toast.makeText(
+                            this,
+                            resources.getString(R.string.others),
+                            Toast.LENGTH_LONG
+                        ).show()
+                        dialogBinding.etOtherName.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        dialogBinding.etOtherName.visibility = View.GONE
+                    }
+                }
+            }
 
 
             dialogBinding.diaUpdate.setOnClickListener {
 
-                dialogBinding.rgGender.setOnCheckedChangeListener { radioGroup, id ->
-                    when (id) {
-                        R.id.rbOthers -> {
-                            Toast.makeText(
-                                this,
-                                resources.getString(R.string.others),
-                                Toast.LENGTH_LONG
-                            ).show()
-                            dialogBinding.etOtherName.visibility = View.VISIBLE
-                        }
-                        else -> {
-                            dialogBinding.etOtherName.visibility = View.GONE
-                        }
-                    }
-                }
 
                 if (dialogBinding.DiaName.text.toString().isNullOrEmpty()) {
                     Toast.makeText(this, "enter name", Toast.LENGTH_SHORT).show()
@@ -95,9 +95,10 @@ class MainActivity : AppCompatActivity() {
                     dialog.dismiss()
                 }
 
-                dialog.show()
 
             }
+            dialog.show()
+
         }
     }
 }
