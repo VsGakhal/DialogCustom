@@ -30,13 +30,6 @@ class CustomDialog : Fragment() {
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-    }
-
     companion object {
         /**
          * Use this factory method to create a new instance of

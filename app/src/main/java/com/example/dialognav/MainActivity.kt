@@ -8,17 +8,17 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Button
 import android.widget.Toast
-import com.example.dialognav.databinding.CustomLayoutBinding
+import com.example.dialognav.databinding.FragmentCustomDialogBinding
 
 
 
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var btnUpdate:  Button
-    lateinit var tvName :    TextView
-    lateinit var tvAddress : TextView
-    lateinit var tvGender :  TextView
+    lateinit var btnUpdate: Button
+    lateinit var tvName: TextView
+    lateinit var tvAddress: TextView
+    lateinit var tvGender: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         btnUpdate.setOnClickListener {
 
-            var dialogBinding = CustomLayoutBinding.inflate(layoutInflater)
+            var dialogBinding = FragmentCustomDialogBinding.inflate(layoutInflater)
             var dialog = Dialog(this)
 
 
@@ -84,19 +84,20 @@ class MainActivity : AppCompatActivity() {
                     tvName.setText(dialogBinding.DiaName.text.toString())
                     tvAddress.setText(dialogBinding.DiaAddress.text.toString())
 
+
                     if (dialogBinding.rbHe.isChecked) {
                         tvGender.setText("Male")
                     } else if (dialogBinding.rbShe.isChecked) {
                         tvGender.setText("Female")
-                    } else
+                    } else if (dialogBinding.rbOthers.isChecked) {
                         tvGender.setText(dialogBinding.etOtherName.text.toString())
                     }
-                dialog.dismiss()
+                    dialog.dismiss()
+                }
+
+                dialog.show()
+
             }
-
-            dialog.show()
-
         }
     }
-}
 }
